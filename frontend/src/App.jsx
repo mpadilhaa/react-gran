@@ -4,9 +4,8 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import Login from "./pages/Auth/Login";
 import Register from "./pages/Auth/Register";
-import Navbar from "../components/Navbar/Navbar";
-import Footer from "../components/Footer/Footer";
-
+import Footer from "./components/Footer/Footer";
+import Navbar from "./components/Navbar/Navbar";
 function App() {
   return (
     <div className="App">
