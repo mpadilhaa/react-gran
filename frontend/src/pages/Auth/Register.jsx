@@ -1,16 +1,24 @@
 import "./Auth.css";
-
+import Message from "../../components/Message/Message";
 //components
 import { Link } from "react-router-dom";
 
 //Hooks
 import { useState, useEffect } from "react";
+import { register, reset } from "../../slices/authSlice";
+
+//redux
+import { useDispatch, useSelector } from "react-redux";
 
 const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+
+  const dispatch = useDispatch();
+  const { loading, error } = useSelector((state) => state.auth);
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -20,7 +28,13 @@ const Register = () => {
       password,
       confirmPassword,
     };
+
+    dispatch(register(user));
   };
+
+  useEffect(() => {
+    dispatch(reset());
+  }, [dispatch]);
 
   return (
     <div id="register">
@@ -54,8 +68,9 @@ const Register = () => {
           value={confirmPassword || ""}
           onChange={(e) => setConfirmPassword(e.target.value)}
         />
-
-        <input type="submit" value="Cadastrar" />
+        {!loading && <input type="submit" value="Cadastrar" />}
+        {loading && <input type="submit" value="Carregando..." />}
+        {error && <Message msg={error} type="error" />}
       </form>
 
       <p>
