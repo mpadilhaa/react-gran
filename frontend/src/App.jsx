@@ -12,6 +12,8 @@ import Navbar from "./components/Navbar/Navbar";
 import { useAuth } from "./hooks/useAuth";
 import EditProfile from "./pages/EditProfile/EditProfile";
 import Profile from "./pages/Profile/Profile";
+import Photo from "./pages/Photo/Photo";
+import Search from "./pages/Search/Search";
 
 function App() {
   const { auth, loading } = useAuth();
@@ -45,6 +47,14 @@ function App() {
             <Route
               path="/register"
               element={!auth ? <Register /> : <Navigate to="/" />}
+            />
+            <Route
+              path="/search"
+              element={auth ? <Search /> : <Navigate to="/login" />}
+            />
+            <Route
+              path="/photos/:id"
+              element={auth ? <Photo /> : <Navigate to="/login" />}
             />
           </Routes>
         </div>
